@@ -4,7 +4,7 @@ npm install
 ```
 
 
-Run with 
+Run with
 ```
-node ./bin/www
+npm start
 ```
