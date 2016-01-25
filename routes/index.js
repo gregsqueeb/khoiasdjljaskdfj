@@ -24,6 +24,24 @@ router.post('/register', function(req, res) {
     });
 });
 
+router.post('/add-hashtag', function(req, res) {
+    if(req.user){
+      req.user.tags.push(req.body.tag)
+      req.user.save(function (err) {
+            if (err)
+            {
+                // TODO: Handle the error!
+            }
+            console.log(req.user.tags)
+            res.redirect('/');
+        });
+    }
+    else{
+      console.log("Not Logged In")
+      res.redirect('/login');
+    }
+});
+
 router.get('/login', function(req, res) {
     res.render('login', { user : req.user });
 });
