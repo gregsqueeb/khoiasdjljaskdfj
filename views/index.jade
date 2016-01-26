@@ -2,23 +2,24 @@ extends layout
 
 block content
   if (!user)
-    a(href="/login") Login
-    br
-    a(href="/register") Register
+    .container
+      h1.text-center Welcome to the best instagram following thing ever!
+      h2.text-center We promise you are going to love it!
+      div.row
+        div.col-md-4.text-center.center-block
+          a.btn.btn-primary(href="/register", type="button") Sign Up
   if (user)
     .container
-      p You are currently logged in as #{user.username}
-      a(href="/logout") Logout
-      br
-      form(role='form', action="/add-hashtag",method="post", style='max-width: 300px;')
-        .form-group
-            input.form-control(type='text', name="tag", placeholder='Add Tag')
-        button.btn.btn-default(type='submit') Add Tag
-        &nbsp;
-        a(href='/')
-          button.btn.btn-primary(type="button") Cancel
-      h2 Your tags:
-      ul
-        - var values = user.tags
-        each val in values
-          li= val
+      .current-tags
+        h2 Your tags:
+        ul
+          - var values = user.tags
+          each val in values
+            li= val
+        form(role='form', action="/add-hashtag",method="post")
+          .form-group
+              input.form-control(type='text', name="tag", placeholder='Add Tag')
+          button.btn.btn-default(type='submit') Add Tag
+          &nbsp;
+          a(href='/')
+            button.btn.btn-primary(type="button") Cancel

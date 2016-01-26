@@ -6,6 +6,20 @@ html
     link(href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', rel='stylesheet', media='screen')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    .header.clearfix
+      p.logo Instakhoi
+      if (user)
+        ul.nav.nav-pills
+          li(role=presentation)
+            p Welcome back #{user.username}
+          li(role=presentation)
+            a(href="/logout") Logout
+      if (!user)
+        ul.nav.nav-pills
+          li(role=presentation)
+            a(href="/login") Login
+          li(role=presentation)
+            a(href="/register") Register
     block content
 
   script(src='http://code.jquery.com/jquery.js')
