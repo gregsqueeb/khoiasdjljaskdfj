@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var Account = require('../models/account');
 var router = express.Router();
+var emailValidation = require('email-address');
 
 
 router.get('/', function (req, res) {
@@ -13,9 +14,14 @@ router.get('/register', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
+    if (!emailValidation.isValid(req.body.username)){
+      console.log("invalid email")
+      return res.render("register", {info: "Please enter a valid email address"});
+    }
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
         if (err) {
-          return res.render("register", {info: "Sorry. That username already exists. Try again."});
+          console.log(err)
+          return res.render("register", {info: "Sorry. An account with that email already exists. Try again."});
         }
 
         passport.authenticate('local')(req, res, function () {
