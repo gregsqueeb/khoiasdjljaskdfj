@@ -15,7 +15,7 @@ block content
         ul
           - var values = user.tags
           each val, index in values
-            li #{val} #[a.delete(href="/delete-tag?tag="+index) delete]
+            li #{val} #[a.delete(href="/delete-tag?tag="+index) remove]
         form(role='form', action="/add-hashtag",method="post")
           .form-group
               input.form-control(type='text', name="tag", placeholder='Add Tag')

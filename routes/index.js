@@ -15,8 +15,6 @@ router.get('/register', function(req, res) {
 
 router.get('/delete-tag', function(req, res) {
     if(req.user){
-      console.log(req.query)
-      console.log(req.user.tags)
       req.user.tags.splice(req.query.tag, 1);
       req.user.save(function (err) {
         if (err)
