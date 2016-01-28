@@ -14,11 +14,21 @@ block content
         h2 Your tags:
         ul
           - var values = user.tags
-          each val in values
-            li= val
+          each val, index in values
+            li #{val} #[a.delete(href="/delete-tag?tag="+index) delete]
         form(role='form', action="/add-hashtag",method="post")
           .form-group
               input.form-control(type='text', name="tag", placeholder='Add Tag')
           button.btn.btn-default(type='submit') Add Tag
           a(href='/')
             button.btn.btn-primary(type="button") Cancel
+    .modal.modal-backdrop(class=(user.igusername===undefined || user.igpassword===undefined?"show":''))
+      .modal-dialog
+        .modal-content
+          h2 What is your instagram username and password?
+          h3 We only use your username and password to auto-like posts for you
+          form(role='form', action="/add-iginfo",method="post")
+            .form-group
+                input.form-control(type='text', name="igusername", placeholder='Instagram Username', value=(user.igusername===undefined?"":user.igusername))
+                input.form-control(type='password', name="igpassword", placeholder='Instagram Password', value=(user.igpassword===undefined?"":user.igpassword))
+            button.btn.btn-default(type='submit') Login to Instagram

@@ -7,7 +7,9 @@ var Account = new Schema({
     password: String,
     date: { type: Date, default: Date.now },
     admin: { type: Boolean, default: false },
-    tags: { type: [String], default: [] }
+    tags: { type: [String], default: [] },
+    igusername: String,
+    igpassword: String
 });
 
 Account.plugin(passportLocalMongoose);
